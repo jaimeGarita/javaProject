@@ -35,6 +35,7 @@ public class StringTestPerformance {
             //1.- append
             //2.- +
             //3.- concat
+            System.gc();
         }
 
         long end = System.currentTimeMillis();
@@ -42,5 +43,7 @@ public class StringTestPerformance {
         System.out.println("sb = " +sb.toString());
         System.out.println(end-begin);
 
+        System.exit(0);
+        /*Este ejemplo se crea muchos objetos String por lo cual se carga toda la memoria que tenemos*/
     }
 }
