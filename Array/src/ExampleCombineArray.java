@@ -12,6 +12,7 @@ public class ExampleCombineArray {
         for (int i = 0; i < b.length; i++) {
             b[i] = (i + 1) * 5;
         }
+
         int aux = 0;
         for (int i = 0; i < b.length; i+=3) {
             for (int j = 0; j < 3; j++) {
