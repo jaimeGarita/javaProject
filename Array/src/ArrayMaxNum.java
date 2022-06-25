@@ -20,13 +20,18 @@ public class ArrayMaxNum {
 
         
         int max = 0;
+        int min = max;
         
         for(int i = 0; i<num.length; i++){
             if(max < num[i]) {
                 max = num[i];
             }
+            if(min > num[i]){
+                min = num[i];
+            }
         }
         System.out.println("max = " + max);
+        System.out.println("min = " + min);
     }
 
 
