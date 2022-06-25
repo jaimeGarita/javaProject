@@ -22,9 +22,10 @@ public class ArrayMaxNum {
         int max = 0;
         int min = max;
         
-        for(int i = 0; i<num.length; i++){
+        for(int i = 0 /*1*/ ; i<num.length ; i++){
             if(max < num[i]) {
                 max = num[i];
+                //max = (num[max] > num[i]) ? max : i;
             }
             if(min > num[i]){
                 min = num[i];
