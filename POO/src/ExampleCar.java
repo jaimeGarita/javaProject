@@ -1,16 +1,13 @@
 public class ExampleCar {
     public static void main(String[] args) {
 
-        Car car = new Car();
+        Car car = new Car("Ferrari", "720", "Blue", 10, 30);
 
-        car.maker = "Ferrari";
-        car.model = "720";
-        car.color = "Blank";
-        car.cylinder = 200;
+        System.out.println(car.showDetails());
+        System.out.println(car.accelerate(100));
+        System.out.println(car.curb());
 
-        System.out.println("car.maker = " + car.maker);
-        System.out.println("car.model = " + car.model);
-        System.out.println("car.color = " + car.color);
-        System.out.println("car.cylinder = " + car.cylinder);
+
+
     }
 }
