@@ -6,6 +6,7 @@ public class Car {
      private double cylinder;
      private int capacity = 40;
 
+     private static String defaultColor = "Blank";
      public Car(String maker, String model) {
           this.maker = maker;
           this.model = model;
@@ -25,6 +26,11 @@ public class Car {
           this(maker, model, color, cylinder);
           this.capacity = capacity;
      }
+
+     public Car() {
+
+     }
+
 
      //POJO = Plain Old Java Object
      public String getMaker() {
@@ -75,12 +81,14 @@ public class Car {
                   "this.cylinder = " + this.cylinder + "\n";
      }
 
+
+
      public String accelerate(int rpm){
           return "the car " + maker + " accelerate to " + rpm;
      }
 
      public String curb(){
-          return this.maker + " " + this.model + " curb! ";
+          return this.maker + " " + this.model + " curbing! ";
      }
 
      public float calculateConsume(int km, float benzinePercentage){
@@ -89,5 +97,36 @@ public class Car {
 
      public float calculateConsume(int km, int benzinePercentage){
           return km/(capacity*benzinePercentage);
+     }
+
+     public static String getDefaultColor(){
+          return defaultColor;
+     }
+
+     public static void setDefaultColor(String defaultColor){
+          Car.defaultColor = defaultColor;
+     }
+     @Override //WE INDICATE THE COMPILER AT RUNTIME THAT WE ARE OVERWRITING A PARENT CLASS METHOD, IT IS ADDITIONAL INFORMATION (ESP)INDICAMOS AL COMPILADOR EN TIEMPO DE EJEUCION QUE ESTAMOS SOBREESSCRIBIENDO UN METODO DE CLASE PADRE, ES INFORMACION ADICIONAL
+     public boolean equals(Object obj) {
+          if(this == obj){
+               return true;
+          }
+          if(!(obj instanceof Car)){
+               return false;
+          }
+          Car a = (Car)obj;
+          return (this.maker.equalsIgnoreCase(a.getMaker()) && this.model.equalsIgnoreCase(a.getModel()));
+     }
+
+     @Override
+     public String toString() {
+          return "Car{" +
+                  "maker='" + maker + '\'' +
+                  ", model='" + model + '\'' +
+                  ", color='" + color + '\'' +
+                  ", cylinder=" + cylinder +
+                  ", capacity=" + capacity +
+                  ", defaultColor=" + Car.defaultColor +
+                  '}';
      }
 }
