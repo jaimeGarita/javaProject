@@ -1,28 +1,36 @@
+import java.lang.annotation.Native;
+
 public class Car {
 
      private String maker;
      private String model;
-     private String color = "Grey";
+     private Color color = Color.GREEN;
      private double cylinder;
      private int capacity = 40;
 
-     private static String defaultColor = "Blank";
+     private CarTypes type;
+
+     @Native
+     public static final int MAX_VELOCITY = 120; //CONST
+
+
+     private static Color defaultColor = Color.BLANK;
      public Car(String maker, String model) {
           this.maker = maker;
           this.model = model;
      }
 
-     public Car(String maker, String model, String color) {
+     public Car(String maker, String model, Color color) {
           this(maker, model);
           this.color = color;
      }
 
-     public Car(String maker, String model, String color, double cylinder) {
+     public Car(String maker, String model, Color color, double cylinder) {
           this(maker, model, color);
           this.cylinder = cylinder;
      }
 
-     public Car(String maker, String model, String color, double cylinder, int capacity) {
+     public Car(String maker, String model, Color color, double cylinder, int capacity) {
           this(maker, model, color, cylinder);
           this.capacity = capacity;
      }
@@ -49,11 +57,11 @@ public class Car {
           this.model = model;
      }
 
-     public String getColor() {
+     public Color getColor() {
           return color;
      }
 
-     public void setColor(String color) {
+     public void setColor(Color color) {
           this.color = color;
      }
 
@@ -73,11 +81,21 @@ public class Car {
           this.capacity = capacity;
      }
 
+     public CarTypes getType() {
+          return type;
+     }
+
+     public void setType(CarTypes type) {
+          this.type = type;
+     }
+
+
      public String showDetails(){
 
           return "this.maker = " + this.maker + "\n" +
                   "this.model = " + this.model + "\n" +
-                  "this.color = " + this.color + "\n" +
+                  "Car.type = " + this.getType().getDescription() + "\n" +
+                  "this.color = " + this.color.getColor() + "\n" +
                   "this.cylinder = " + this.cylinder + "\n";
      }
 
@@ -99,11 +117,11 @@ public class Car {
           return km/(capacity*benzinePercentage);
      }
 
-     public static String getDefaultColor(){
+     public static Color getDefaultColor(){
           return defaultColor;
      }
 
-     public static void setDefaultColor(String defaultColor){
+     public static void setDefaultColor(Color defaultColor){
           Car.defaultColor = defaultColor;
      }
      @Override //WE INDICATE THE COMPILER AT RUNTIME THAT WE ARE OVERWRITING A PARENT CLASS METHOD, IT IS ADDITIONAL INFORMATION (ESP)INDICAMOS AL COMPILADOR EN TIEMPO DE EJEUCION QUE ESTAMOS SOBREESSCRIBIENDO UN METODO DE CLASE PADRE, ES INFORMACION ADICIONAL
