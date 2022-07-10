@@ -1,12 +1,17 @@
 import java.lang.annotation.Native;
+import java.util.Arrays;
 
 public class Car {
+     private static int lastId;
+     private int id;
 
      private String maker;
      private String model;
      private Color color = Color.GREEN;
-     private double cylinder;
-     private int capacity = 40;
+     private Engine engine;
+     private Deposit deposit;
+     private Person owner;
+     private Wheel[] wheels;
 
      private CarTypes type;
 
@@ -25,20 +30,25 @@ public class Car {
           this.color = color;
      }
 
-     public Car(String maker, String model, Color color, double cylinder) {
+     public Car(String maker, String model, Color color, Engine engine) {
           this(maker, model, color);
-          this.cylinder = cylinder;
+          this.engine = engine;
      }
 
-     public Car(String maker, String model, Color color, double cylinder, int capacity) {
-          this(maker, model, color, cylinder);
-          this.capacity = capacity;
+     public Car(String maker, String model, Color color, Engine engine, Deposit deposit) {
+          this(maker, model, color, engine);
+          this.deposit = deposit;
      }
 
      public Car() {
-
+          this.id = lastId++;
      }
 
+     public Car(String maker, String model, Color color, Engine engine, Deposit deposit, Person owner, Wheel[] wheels) {
+          this(maker, model, color, engine, deposit);
+          this.owner = owner;
+          this.wheels = wheels;
+     }
 
      //POJO = Plain Old Java Object
      public String getMaker() {
@@ -65,22 +75,6 @@ public class Car {
           this.color = color;
      }
 
-     public double getCylinder() {
-          return cylinder;
-     }
-
-     public void setCylinder(double cylinder) {
-          this.cylinder = cylinder;
-     }
-
-     public int getCapacity() {
-          return capacity;
-     }
-
-     public void setCapacity(int capacity) {
-          this.capacity = capacity;
-     }
-
      public CarTypes getType() {
           return type;
      }
@@ -89,14 +83,55 @@ public class Car {
           this.type = type;
      }
 
+     public Engine getEngine() {
+          return engine;
+     }
+
+     public void setEngine(Engine engine) {
+          this.engine = engine;
+     }
+
+     public Deposit getDeposit() {
+
+          if (deposit == null){
+               this.deposit = new Deposit();
+          }
+
+          return deposit;
+     }
+
+     public void setDeposit(Deposit deposit) {
+          this.deposit = deposit;
+     }
+
+     public Person getOwner() {
+          return owner;
+     }
+
+     public void setOwner(Person owner) {
+          this.owner = owner;
+     }
+
+     public Wheel[] getWheels() {
+          return wheels;
+     }
+
+     public void setWheels(Wheel[] wheels) {
+          this.wheels = wheels;
+     }
 
      public String showDetails(){
 
-          return "this.maker = " + this.maker + "\n" +
-                  "this.model = " + this.model + "\n" +
-                  "Car.type = " + this.getType().getDescription() + "\n" +
-                  "this.color = " + this.color.getColor() + "\n" +
-                  "this.cylinder = " + this.cylinder + "\n";
+          String details = "this.maker = " + this.maker + "\n" +
+                  "this.model = " + this.model + "\n";
+          if (getType() != null) {
+               details += "Car.type = " + this.getType().getDescription();
+          }
+
+          details += "this.color = " + this.color.getColor() + "\n" +
+                  "this.engine = " + engine.getType() + "\n";
+
+          return details;
      }
 
 
@@ -110,11 +145,11 @@ public class Car {
      }
 
      public float calculateConsume(int km, float benzinePercentage){
-          return km/(capacity*benzinePercentage);
+          return km/(this.getDeposit().getCapacity()*benzinePercentage);
      }
 
      public float calculateConsume(int km, int benzinePercentage){
-          return km/(capacity*benzinePercentage);
+          return km/(this.getDeposit().getCapacity()*benzinePercentage);
      }
 
      public static Color getDefaultColor(){
@@ -138,13 +173,24 @@ public class Car {
 
      @Override
      public String toString() {
-          return "Car{" +
-                  "maker='" + maker + '\'' +
+
+          String details = "Car{" +
+                  "id=" + id +
+                  ", maker='" + maker + '\'' +
                   ", model='" + model + '\'' +
-                  ", color='" + color + '\'' +
-                  ", cylinder=" + cylinder +
-                  ", capacity=" + capacity +
-                  ", defaultColor=" + Car.defaultColor +
+                  ", color=" + color;
+                    if (engine.getType() != null) {
+                        details += ", engine=" + engine.getType();
+                    }
+                 details += ", deposit=" + deposit.getCapacity();
+               if(this.owner != null){
+                    details += ", owner=" + owner.toString();
+               }
+
+               details+=  Arrays.toString(wheels) +
+                  ", type=" + type +
                   '}';
+
+          return details;
      }
 }
