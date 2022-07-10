@@ -3,15 +3,21 @@ import java.util.Date;
 public class ExampleCar {
     public static void main(String[] args) {
 
-        Car car = new Car("Ferrari", "720", Color.GREEN, 10, 30);
-        Car car2 = new Car("Ferrari", "720", Color.PURPLE, 10, 30);
+        Engine carEngine = new Engine(3.0, TypeEngine.GASOLINE);
+
+        Car car = new Car("Ferrari", "720", Color.GREEN, new Engine(carEngine), new Deposit(50));
+        Car car2 = new Car("Ferrari", "720", Color.PURPLE, new Engine(4.0, TypeEngine.GASOLINE), new Deposit(50));
         Date date = new Date();
 
+        car.setEngine(new Engine(2.0, TypeEngine.DIESEL));
+        car.setDeposit(new Deposit()); //40
 
         Car car3 = new Car();
-        System.out.println("car3 = " + car3);
+        System.out.println("----");
+        System.out.println("car.showDetails() = " + car.showDetails());
+        System.out.println("----");
         System.out.println("car2 = " + car2.toString());
-
+        car3.getDeposit();
 
 
         System.out.println(car.showDetails());
