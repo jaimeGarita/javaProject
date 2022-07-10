@@ -1,6 +1,6 @@
 public enum CarTypes {
     SEDAN("Sedan", "Medium Car", 4),
-    STATION_WAGON("Station Wagon", "Big Car", 4),
+    STATION_WAGON("Station Wagon", "Big Car", 5),
     HATCHBACK("Hatchback", "Compact Auto", 4),
     PICKUP("Pickup", "Van", 4),
     COUPE("Coupe", "Small Car", 2),
