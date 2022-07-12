@@ -9,11 +9,16 @@ public class Person {
         this.surname = surname;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    @Override
     public String toString() {
-        String details = " ";
-        if (toString() != null) {
-            details+= name + " " + surname;
-        }
-        return details;
+        return name + " " + surname;
     }
 }
