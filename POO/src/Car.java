@@ -1,7 +1,7 @@
 import java.lang.annotation.Native;
 import java.util.Arrays;
 
-public class Car {
+public class Car implements Comparable<Car>{
      private static int lastId;
      private int id;
 
@@ -12,6 +12,7 @@ public class Car {
      private Deposit deposit;
      private Person owner;
      private Wheel[] wheels;
+     private int iWheel = 0;
 
      private CarTypes type;
 
@@ -21,6 +22,7 @@ public class Car {
 
      private static Color defaultColor = Color.BLANK;
      public Car(String maker, String model) {
+          this();
           this.maker = maker;
           this.model = model;
      }
@@ -42,6 +44,7 @@ public class Car {
 
      public Car() {
           this.id = lastId++;
+          this.wheels = new Wheel[5];
      }
 
      public Car(String maker, String model, Color color, Engine engine, Deposit deposit, Person owner, Wheel[] wheels) {
@@ -120,6 +123,15 @@ public class Car {
           this.wheels = wheels;
      }
 
+     public Car addWheel(Wheel wheel){
+          if(iWheel < this.wheels.length) {
+               this.wheels[iWheel++] = wheel;
+          }
+          return this;
+     }
+
+
+
      public String showDetails(){
 
           String details = "this.maker = " + this.maker + "\n" +
@@ -173,24 +185,16 @@ public class Car {
 
      @Override
      public String toString() {
+          String details;
 
-          String details = "Car{" +
-                  "id=" + id +
-                  ", maker='" + maker + '\'' +
-                  ", model='" + model + '\'' +
-                  ", color=" + color;
-                    if (engine.getType() != null) {
-                        details += ", engine=" + engine.getType();
-                    }
-                 details += ", deposit=" + deposit.getCapacity();
-               if(this.owner != null){
-                    details += ", owner=" + owner.toString();
-               }
-
-               details+=  Arrays.toString(wheels) +
-                  ", type=" + type +
-                  '}';
+          details = this.id + " : " + this.getMaker() + " " + this.getModel() + this.getOwner();
 
           return details;
      }
+
+     @Override
+     public int compareTo(Car a) {
+          return this.owner.toString().compareTo(a.maker.toString());
+     }
+
 }
