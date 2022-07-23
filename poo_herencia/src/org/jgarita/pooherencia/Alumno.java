@@ -9,6 +9,32 @@ public class Alumno extends Persona {
     private double notaHistoria;
 
 
+    public Alumno(/*String nombre*/){ //invoca el constructor de persona
+        //super(nombre); //siempre va antes que cualquier otra cosa, es lo primero que se invoca, si se omite llama al constructor del padre sin parametros
+        System.out.println("Alumno: inicializando constructor...");
+    }
+
+    public Alumno(String nombre, String apellido){
+        super(nombre, apellido);
+    }
+
+    public Alumno(String nombre, String apellido, int edad){
+        super(nombre, apellido, edad);
+    }
+
+    public Alumno(String nombre, String apellido, int edad, String colegio){
+        super(nombre, apellido, edad);
+        this.colegio = colegio;
+    }
+
+    public Alumno(String nombre, String apellido, int edad, String colegio, double notaMatematica, double notaLengua, double notaHistoria) {
+        this(nombre, apellido, edad, colegio);
+
+        this.notaMatematica = notaMatematica;
+        this.notaLengua = notaLengua;
+        this.notaHistoria = notaHistoria;
+    }
+
     public String getColegio() {
         return colegio;
     }
